@@ -28,6 +28,11 @@ view: order_items {
     # hidden: yes
     sql: ${TABLE}.order_id ;;
   }
+  dimension :add_two_ids{
+    type: number
+    sql: ${inventory_item_id}+${order_id} ;;
+  }
+
 
   # Dates and timestamps can be represented in Looker using a dimension group of type: time.
   # Looker converts dates and timestamps to the specified timeframes within the dimension group.
@@ -49,6 +54,17 @@ view: order_items {
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+  }
+  measure: total_revenue_formatted {
+    type: sum
+    sql: ${sale_price} - 0.5;;
+    html: {% if value < 0 %}
+          <p style="color:red">({{rendered_value}})</p>
+          {% else %}
+          <p>{{rendered_value}}</p>
+          {% endif %};;
+    value_format_name: usd
+
   }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average

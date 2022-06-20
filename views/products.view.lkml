@@ -47,6 +47,26 @@ view: products {
     sql: ${TABLE}.retail_price ;;
   }
 
+  dimension: category_example_0 {
+    group_label: "Formatting Examples"
+    label: "Category"
+    type: string
+    sql: ${TABLE}.category ;;
+    html: <p style="text-align:center">{{value}}</p> ;;
+  }
+
+  dimension: category_example_1 {
+    group_label: "Formatting Examples"
+    label: "Category Formatted"
+    type: string
+    sql: ${TABLE}.category ;;
+    html: <p style="color: #166088; background-color: #B3F5F7; font-size: 150%; font-weight: bold; text-align:center">{{value}}</p> ;;
+  }
+  dimension: product_image {
+    sql: ${id} ;;
+    html: <img src="http://www.brettcase.com/product_images/{{ value }}.jpg" /> ;;
+  }
+
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
