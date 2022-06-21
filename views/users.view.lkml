@@ -123,9 +123,12 @@ view: users {
           <p style="color: black; background-color: #FFD6D6; font-size:100%; text-align:right"> {{value}} </p>
         {% endif %};;
   }
-
-
-
+  dimension: email1 {
+    group_label: "States"
+    label: "{% if _model._name == 'thelook' %} Looker Registered Email Address {% else %} External Email Address {% endif %}"
+    type: string
+    sql: ${TABLE}.email1 ;;
+  }
   dimension: traffic_source {
     type: string
     sql: ${TABLE}.traffic_source ;;
