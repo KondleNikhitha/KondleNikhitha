@@ -87,7 +87,44 @@ view: users {
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
+
   }
+  dimension: state1 {
+    group_label: "States"
+    type: string
+    sql: ${TABLE}.state ;;
+    html: <a href="https://www.google.com/search?q={{value}}" target="_blank"> {{value}} </a>;;
+  }
+
+  dimension: state2{
+    group_label: "States"
+    type: string
+    sql: ${TABLE}.state ;;
+    link: {
+      label: "Search in Google"
+      url: "https://www.google.com/search?q={{value}}"
+    }
+    link: {
+      label: "Search this State in Google"
+      url: "https://www.google.com/search?q={{value}}"
+    }
+  }
+
+  dimension: state_3 {
+    type: string
+    group_label: "States"
+    sql: ${TABLE}.state ;;
+    html:
+        {% if value == "Alabama" %}
+          <p style="color: black; background-color: lightblue; font-size:100%; text-align:center"> {{value}} </p>
+        {% elsif value == "California" %}
+          <p style="color: black; background-color: #B9C1BD; font-size:100%; text-align:lef"> {{value}} </p>
+        {% else %}
+          <p style="color: black; background-color: #FFD6D6; font-size:100%; text-align:right"> {{value}} </p>
+        {% endif %};;
+  }
+
+
 
   dimension: traffic_source {
     type: string

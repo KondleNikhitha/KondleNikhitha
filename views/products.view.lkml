@@ -63,8 +63,30 @@ view: products {
     html: <p style="color: #166088; background-color: #B3F5F7; font-size: 150%; font-weight: bold; text-align:center">{{value}}</p> ;;
   }
   dimension: product_image {
+    group_label: "Formatting Examples"
     sql: ${id} ;;
     html: <img src="http://www.brettcase.com/product_images/{{ value }}.jpg" /> ;;
+  }
+  measure: total_revenue_formatted {
+    type: sum
+    group_label: "Formatting Examples"
+    sql: ${retail_price} - 0.5;;
+    html: {% if value < 0 %}
+          <p style="color:red">({{rendered_value}})</p>
+          {% else %}
+          <p>{{rendered_value}}</p>
+          {% endif %}
+
+    format : usd;;
+  }
+  dimension: artist_name {
+    group_label: "Formatting Examples"
+    sql: ${TABLE}.artist_name ;;
+    link: {
+      label: "Google"
+      url: "http://www.google.com/search?q={{ value }}"
+      icon_url: "http://google.com/favicon.ico"
+    }
   }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
