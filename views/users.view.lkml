@@ -93,7 +93,7 @@ view: users {
     group_label: "States"
     type: string
     sql: ${TABLE}.state ;;
-    html: <a href="https://www.google.com/search?q={{value}}" target="_blank"> {{value}} </a>;;
+    html: <a href="https://www.google.com/search?q={{value}}"> {{value}} </a>;;
   }
 
   dimension: state2{
@@ -116,11 +116,11 @@ view: users {
     sql: ${TABLE}.state ;;
     html:
         {% if value == "Alabama" %}
-          <p style="color: black; background-color: lightblue; font-size:100%; text-align:center"> {{value}} </p>
+          <p style="color: black; background-color: lightblue; font-size:100%; text-align:right"> {{value}} </p>
         {% elsif value == "California" %}
-          <p style="color: black; background-color: #B9C1BD; font-size:100%; text-align:lef"> {{value}} </p>
+          <p style="color: black; background-color: orange; font-size:100%; text-align:left"> {{value}} </p>
         {% else %}
-          <p style="color: black; background-color: #FFD6D6; font-size:100%; text-align:right"> {{value}} </p>
+          <p style="color: black; background-color: pink; font-size:100%; text-align:center"> {{value}} </p>
         {% endif %};;
   }
   dimension: email1 {
@@ -129,6 +129,13 @@ view: users {
     type: string
     sql: ${TABLE}.email1 ;;
   }
+
+  dimension: linked_name {
+    group_label: "States"
+    sql: ${first_name} ;;
+    html: <a href="{{ website.url._value }}" target="_blank">{{ value }}</a> ;;
+  }
+
   dimension: traffic_source {
     type: string
     sql: ${TABLE}.traffic_source ;;
@@ -138,6 +145,18 @@ view: users {
     type: zipcode
     sql: ${TABLE}.zip ;;
   }
+  measure: count_without_liquid {
+    type: count
+  }
+
+  measure: count_with_liquid {
+    type: count
+    link: {
+      label: "Status Count"
+      url: "https://www.google.com/search?q={{ state._value }}"
+    }
+  }
+
 
   measure: count {
     type: count

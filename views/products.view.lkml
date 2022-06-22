@@ -21,6 +21,14 @@ view: products {
     type: string
     sql: ${TABLE}.brand ;;
   }
+  dimension: brand1 {
+    type: string
+    sql: ${TABLE}.brand
+          access_filter: {
+          field: products.brand
+          user_attribute: company
+          ;;
+  }
 
   dimension: category {
     type: string
@@ -88,6 +96,23 @@ view: products {
       icon_url: "http://google.com/favicon.ico"
     }
   }
+  parameter: item_to_add_up {
+    group_label: "Formatting Examples"
+    type: unquoted
+    allowed_value: {
+      label: "Total Sale Price"
+      value: "sale_price"
+    }
+    allowed_value: {
+      label: "Total Cost"
+      value: "cost"
+    }
+    allowed_value: {
+      label: "Total Profit"
+      value: "profit"
+    }
+  }
+
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
